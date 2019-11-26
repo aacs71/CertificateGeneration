@@ -1,0 +1,122 @@
+﻿using System;
+using System.Windows.Forms;
+using CertificateManager.Infrastructure;
+using Org.BouncyCastle.Asn1.X509;
+
+namespace CertificateManager.Views
+{
+    public partial class SelfSignedCreateForm : Form, ISelfSignedCreateFormView
+    {
+        private readonly SelfSignedCreateFormPresenter _presenter;
+
+        public SelfSignedCreateForm()
+        {
+            InitializeComponent();
+        }
+
+        public SelfSignedCreateForm(SelfSignedCreateFormPresenter presenter)
+            : this()
+        {
+            _presenter = presenter;
+            _presenter.View = this;
+        }
+
+        public IPresenter Presenter
+        {
+            get { return _presenter; }
+        }
+
+        public int AvailableKeyUsage
+        {
+            set { kuControl.EnableControls(value); }
+        }
+
+        public int DefaultKeyUsage
+        {
+            set { kuControl.CheckControls(value); }
+        }
+
+        public KeyUsage KeyUsage
+        {
+            get { return kuControl.Usage; }
+        }
+
+        public KeyPurposeID[] AvailablePurpose
+        {
+            set { kpPurpose.EnableControls(value); }
+        }
+
+        public KeyPurposeID[] DefaultPurpose
+        {
+            set { kpPurpose.CheckControls(value); }
+        }
+
+        public KeyPurposeID[] Purpose
+        {
+            get { return kpPurpose.Purposes; }
+        }
+
+        public string[] Algoritms
+        {
+            set
+            {
+                cbAlgoritms.BeginUpdate();
+                cbAlgoritms.Items.Clear();
+                cbAlgoritms.Items.AddRange(value);
+                cbAlgoritms.EndUpdate();
+            }
+        }
+
+        public string DefaultAlgoritm
+        {
+            set { cbAlgoritms.SelectedItem = cbAlgoritms.Items[cbAlgoritms.Items.IndexOf(value)]; }
+        }
+
+        public string Algoritm
+        {
+            get { return cbAlgoritms.SelectedItem as string; }
+        }
+
+        public int DefaultKeyLength
+        {
+            set { numKeyLength.Value = value; }
+        }
+
+        public int KeyLength
+        {
+            get { return (int) numKeyLength.Value; }
+        }
+
+        public string Subject
+        {
+            get { return tbSubject.Text.Trim(); }
+        }
+
+        public DateTime From
+        {
+            set { calFrom.Value = value; }
+            get { return calFrom.Value; }
+        }
+
+        public int Duration
+        {
+            get { return (int) numDuration.Value; }
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            _presenter.OnViewReady();
+        }
+
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (_presenter.Generate())
+            {
+                Close();
+            }
+        }
+    }
+}

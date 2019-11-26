@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9C82877-16E5-4F39-80DF-4EFA02AC11B7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CertificateManager</RootNamespace>
+    <AssemblyName>CertificateManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infrastructure\CollectionExtensions.cs" />
+    <Compile Include="KeyPurposeUtils.cs" />
+    <Compile Include="Services\Constants.cs" />
+    <Compile Include="Infrastructure\DisposableObject.cs" />
+    <Compile Include="Infrastructure\Guard.cs" />
+    <Compile Include="Infrastructure\IView.cs" />
+    <Compile Include="Infrastructure\ObjectFactory.cs" />
+    <Compile Include="Infrastructure\Presenter.cs" />
+    <Compile Include="KeyUsageUtils.cs" />
+    <Compile Include="Services\AbstractCertificateGenerator.cs" />
+    <Compile Include="Services\CertificateUtils.cs" />
+    <Compile Include="Services\DefaultCAGenerator.cs" />
+    <Compile Include="Services\DefaultClientCertificateGenerator.cs" />
+    <Compile Include="Services\DefaultSelfSignedCertificateGenerator.cs" />
+    <Compile Include="Services\DefaultServerCertificateGenerator.cs" />
+    <Compile Include="Services\DefaultSubCAGenerator.cs" />
+    <Compile Include="Services\IODERUtils.cs" />
+    <Compile Include="Services\IOPEMUtils.cs" />
+    <Compile Include="Services\IOPkcs12Utils.cs" />
+    <Compile Include="Services\Pkcs12StoreGenerator.cs" />
+    <Compile Include="UserControls\KeyPurposeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\KeyPurposeControl.Designer.cs">
+      <DependentUpon>KeyPurposeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\KeyUsageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\KeyUsageControl.Designer.cs">
+      <DependentUpon>KeyUsageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFormPresenter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DefaultCertificateRevocationListGenerator.cs" />
+    <Compile Include="Services\UrlEvaluator.cs" />
+    <Compile Include="Views\CACreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CACreateForm.Designer.cs">
+      <DependentUpon>CACreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CACreateFormPresenter.cs" />
+    <Compile Include="Views\ConvertPem2DerCertificateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ConvertPem2DerCertificateForm.Designer.cs">
+      <DependentUpon>ConvertPem2DerCertificateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConvertPem2DerCertificateFormPresenter.cs" />
+    <Compile Include="Views\ConvertPem2Pkcs12CertificateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ConvertPem2Pkcs12CertificateForm.Designer.cs">
+      <DependentUpon>ConvertPem2Pkcs12CertificateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConvertPem2Pkcs12CertificateFormPresenter.cs" />
+    <Compile Include="Views\CrlCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CrlCreateForm.Designer.cs">
+      <DependentUpon>CrlCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CrlCreateFormPresenter.cs" />
+    <Compile Include="Views\EndUserCertificateCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EndUserCertificateCreateForm.Designer.cs">
+      <DependentUpon>EndUserCertificateCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EndUserCertificateCreateFormPresenter.cs" />
+    <Compile Include="Views\ICertificateCreateView.cs" />
+    <Compile Include="Views\SelfSignedCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SelfSignedCreateForm.Designer.cs">
+      <DependentUpon>SelfSignedCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelfSignedCreateFormPresenter.cs" />
+    <Compile Include="Views\ServerCertificateCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ServerCertificateCreateForm.Designer.cs">
+      <DependentUpon>ServerCertificateCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServerCertificateCreateFormPresenter.cs" />
+    <Compile Include="Views\SubCACreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SubCACreateForm.Designer.cs">
+      <DependentUpon>SubCACreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubCACreateFormPresenter.cs" />
+    <Compile Include="Views\UpdateCrlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateCrlForm.Designer.cs">
+      <DependentUpon>UpdateCrlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateCrlFormPresenter.cs" />
+    <Compile Include="Views\UriGenerationHelpWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UriGenerationHelpWindow.Designer.cs">
+      <DependentUpon>UriGenerationHelpWindow.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UserControls\KeyPurposeControl.resx">
+      <DependentUpon>KeyPurposeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\KeyUsageControl.resx">
+      <DependentUpon>KeyUsageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\CACreateForm.resx">
+      <DependentUpon>CACreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ConvertPem2DerCertificateForm.resx">
+      <DependentUpon>ConvertPem2DerCertificateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ConvertPem2Pkcs12CertificateForm.resx">
+      <DependentUpon>ConvertPem2Pkcs12CertificateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CrlCreateForm.resx">
+      <DependentUpon>CrlCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EndUserCertificateCreateForm.resx">
+      <DependentUpon>EndUserCertificateCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SelfSignedCreateForm.resx">
+      <DependentUpon>SelfSignedCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ServerCertificateCreateForm.resx">
+      <DependentUpon>ServerCertificateCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SubCACreateForm.resx">
+      <DependentUpon>SubCACreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UpdateCrlForm.resx">
+      <DependentUpon>UpdateCrlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UriGenerationHelpWindow.resx">
+      <DependentUpon>UriGenerationHelpWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Certificate-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Server-Certificate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agreement-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ID-New.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit - 01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Branch-Engineering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Certificate-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agreement-01.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
